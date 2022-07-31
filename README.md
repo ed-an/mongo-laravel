@@ -39,7 +39,7 @@ O Laravel geralmente é usado com bancos de dados relacionais como MySQL e fornec
  **__.docker__** - Este diretório contém todos as configurações do php e nginx.<br>
       <ul>
       <li> *__nginx__* - Diretório com a configuração nginx.conf</li>
-      <li> *__php__* - Diretório com a configuração php.conf </li>
+      <li> *__php__* - Diretório com a configuração uploads.ini </li>
        <li> *__Dockefile__*  Contém instruções que criará uma imagem da aplicação </li>
     </ul>
  **__db__**  -  Esse  diretório será mapeado para o container, 
