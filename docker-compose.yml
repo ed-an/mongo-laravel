@@ -1,0 +1,44 @@
+version: "3.7"
+services:
+  app:
+    build: 
+      args: 
+        user: $USER 
+        uid: $IDUSER 
+      context: ./.docker
+      dockerfile: Dockerfile
+    image: laravelapp
+    container_name: laravelapp-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./src:/var/www
+      - ./.docker/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+    networks:
+      - netapp
+
+  mongodb:
+    image: "mongo:3.6"
+    container_name: laravelapp-mongo
+    ports:
+     - "27017:27017"
+    volumes:
+     - ./db/mongo:/data/db
+    networks:
+     - netapp   
+
+  nginx:
+    image: nginx:1.17-alpine
+    container_name: laravelapp-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./src:/var/www
+      - ./.docker/nginx:/etc/nginx/conf.d
+    networks:
+      - netapp
+
+networks:
+  netapp:
+   driver: bridge
